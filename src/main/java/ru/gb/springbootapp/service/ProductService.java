@@ -1,7 +1,7 @@
 package ru.gb.springbootapp.service;
 
 import org.springframework.stereotype.Service;
-import ru.gb.springbootapp.dto.Product;
+import ru.gb.springbootapp.model.Product;
 import ru.gb.springbootapp.repository.ProductRepository;
 
 import java.util.List;
@@ -15,14 +15,16 @@ public class ProductService {
     }
 
     public List<Product> getAll(){
-        return productRepository.getAll();
+        return productRepository.findAll();
     }
 
     public void save(Product product){
         productRepository.save(product);
     }
 
-    public Product findId(int id){
-        return productRepository.findId(id);
+    public Product findId(Long id){
+        return productRepository.findById(id).orElse(null);
     }
+
+    public void deleteById(Long id) {productRepository.deleteById(id);}
 }
