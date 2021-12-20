@@ -36,8 +36,8 @@ public class ProductController {
     }
 
     @PostMapping("/add")
-    public String saveProduct(@RequestParam Integer id, @RequestParam String title, @RequestParam Integer cost){
-        productService.save(new Product(id,title,cost));
-        return "redirect:all";
+    public String saveProduct(Product product){
+        productService.save(product);
+        return "redirect:/all";
     }
 }
