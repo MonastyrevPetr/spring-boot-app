@@ -5,8 +5,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import ru.gb.springbootapp.dto.Product;
+import ru.gb.springbootapp.dto.ProductDto;
+import ru.gb.springbootapp.model.Product;
 import ru.gb.springbootapp.service.ProductService;
 
 @Controller
@@ -18,14 +18,14 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @GetMapping("/all")
+    @GetMapping("/")
     public String getAllProduct(Model model){
         model.addAttribute("products",productService.getAll());
         return "product_list";
     }
 
     @GetMapping("/info/{id}")
-    public String getProductInfo(@PathVariable Integer id, Model model){
+    public String getProductInfo(@PathVariable Long id, Model model){
         model.addAttribute("product", productService.findId(id));
         return "product_info";
     }
@@ -38,6 +38,12 @@ public class ProductController {
     @PostMapping("/add")
     public String saveProduct(Product product){
         productService.save(product);
-        return "redirect:/all";
+        return "redirect:/";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String saveProduct(@PathVariable Long id){
+        productService.deleteById(id);
+        return "redirect:/";
     }
 }
