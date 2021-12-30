@@ -7,11 +7,7 @@ import ru.gb.springbootapp.model.Product;
 @Data
 @NoArgsConstructor
 public class ProductDto {
+  private Long id;
   private String title;
   private String cost;
-
-  public ProductDto(Product product){
-    title = product.getTitle();
-    cost = product.getCost().toString();
-  }
 }
